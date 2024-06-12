@@ -11,17 +11,21 @@ host: "mc-api.dribl.com"
 basePath: "/api"
 
 tags:
+- name: clubs
+  description: "all the clubs "  
 - name: "season"
   description: "Season to be played"
 - name: fixture
   description: "all the fixtures "
+- name: lists
+  description: "listing entities"
 
 
 schemes:
 - "https"
 
 paths:
-  /list/seasons:
+  /seasons:
     get:
       tags:
       - "season"
@@ -31,13 +35,100 @@ paths:
       - "multipart/form-data"
       produces:
       - "application/json"
-      parameters:      
+      parameters:
+        - in: query
+          name: disable_paging
+          required: false
+          type: boolean 
+          description: "disable result pagination \n deault page size: 100"
+
+        - in: query
+          name: page
+          required: false
+          type: integer
+          description: "page selection - only available if disable_paging = false"
+
       responses:
         '200':
           description: 'successful operation'
           schema:
             $ref: '#/definitions/SeasonArray'  
 
+  /seasons/{id}:
+    get:
+      tags:
+      - "season"
+      summary: "returns season by id"
+      description: "returns season details by id"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+        - in: path 
+          name: id
+          required: true
+          type: string 
+          description: "season_id"        
+
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Season'
+
+  /list/seasons:
+    get:
+      tags:
+      - "season"
+      - "lists"
+      summary: "list all seasons"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/SeasonArray'  
+
+  /list/clubs:
+    get:
+      tags:
+      - "clubs"
+      - "lists"
+    summary: "list all clubs"
+
+  /clubs:
+    get:
+      tags:
+      - "clubs"
+      - "lists"
+    summary: "queries clubs"
+  
+  /clubs/{id}:
+    get:
+      tags:
+      - "clubs"
+
+  /leagues:
+    get:
+      tags:
+      - "league"
+      summary: "get leagues"
+      description: "lists all leagues matching the criteria \n Pagination seems to be always enabled and page size = 30"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/League'  
 
 
 definitions:
@@ -62,6 +153,15 @@ definitions:
       is_current:
         type: boolean
         example: false
+      links: 
+        type: object
+        properties:
+          self:
+            type: object 
+            properties:
+              href: 
+                type: string
+                example: "https://mc-api.dribl.com/api/seasons/JR1K3RNQ9M"
 
   SeasonArray:
     type: object
@@ -70,3 +170,45 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Season'
+
+  League:
+    type: object 
+    properties:
+      type:
+        type: string
+        example: "leagues"
+      id:
+        type: string
+        example: "8nm7Qzv0KO"
+      value: 
+        type: string
+        example: "8nm7Qzv0KO"      
+      order:
+        type: number
+        example: "19127"
+      title:
+        type: string 
+        example: "06 Leckie"
+      name:
+        type: string 
+        example: "06 Leckie"        
+      ladder_access: 
+        type: string 
+        example: "body"        
+      result_access: 
+        type: string 
+        example: "body"                
+      fixture_access:
+        type: string 
+        example: "public"        
+      image:
+        type: string
+      links: 
+        type: object
+        properties:
+          self:
+            type: object 
+            properties:
+              href: 
+                type: string
+                example: "https://mc-api.dribl.com/api/leagues/8nm7Qzv0KO"
