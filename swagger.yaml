@@ -1,7 +1,34 @@
 swagger: "2.0"
 info:
-  description: "trying to reverse engineer the dribl.com public api"
+
   title: "mc-api.dribl.com - UNOFFICIAL api documentation"
+  description: "trying to reverse engineer the dribl.com public api \n
+  the dribl app has many concepts that need to be related to each other. \n
+  * tenant
+
+  * league
+  
+  * club
+  
+  * team
+  
+  * ground
+  
+  * field
+  
+  * fixture
+  
+  * match
+  
+  * result 
+  
+  * ladder
+  
+  * competition
+
+
+I am still working out the relationships ...
+  "
   termsOfService: ""
   contact:
     email: me@example.com 
@@ -12,11 +39,13 @@ basePath: "/api"
 
 tags:
 - name: clubs
-  description: "all about the clubs "  
+  description: "Clubs have multiple teams "  
 - name: "season"
   description: "all about the seasons"
 - name: fixture
-  description: "all about the fixtures "
+  description: "Fixtures are matches "
+- name: grounds
+  description: "Grounds are a collection of Fields "  
 - name: lists
   description: "listing entities"
 
@@ -174,6 +203,10 @@ paths:
       tags:
       - "ladders"
       summary: "queries ladders"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
       parameters:
         - in: query 
           name: league
@@ -185,6 +218,10 @@ paths:
       tags:
       - "ladders"
       summary: "queries ladders"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
       parameters: 
         - name: id
           in: path
@@ -196,25 +233,84 @@ paths:
     get:
       tags:
       - "grounds"
-      summary: "queries grounds"   
-
+      summary: "queries grounds"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
   /grounds/{id}:
     get:
       tags:
       - "grounds"
       summary: "queries grounds by id"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string 
+          description: "ground_id"
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Ground'
 
   /competitions:
     get:
       tags:
       - "competitions"
       summary: "queries competitions"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
 
   /competitions/{id}:
     get:
       tags:
       - "competitions"
       summary: "queries competitions by ID"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string 
+          description: "competition_id" 
+
+  /tenants:
+    get:
+      tags:
+      - "tenants"
+      summary: "queries tenants"  
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
+      parameters: 
+        - name: tenant
+          in: query
+          required: true
+          type: string 
+          description: "tenant_id" 
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Tenant'  
+
 
 #swagger generator: https://roger13.github.io/SwagDefGen/
 
@@ -495,7 +591,8 @@ definitions:
     properties:        
       type: 
         type: string
-        example: clubs
+        values: clubs
+        description: ERROR in implentation, should be set to grounds!!
       hash_id: 
         type: string
         example: vbd9v3n8m4
@@ -634,6 +731,75 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Club'
+
+
+  Tenant: 
+    type: object
+    properties:
+      data: 
+        type: object
+        properties: 
+          type: 
+            type: string
+            example: tenants
+          id: 
+            type: string
+            example: 1RwNlWemjr
+          attributes: 
+            type: object
+            properties: 
+              name: 
+                type: string
+                example: FNSW
+              slug: 
+                type: string
+                example: fdprod
+              image: 
+                type: string
+                example: https://ocean.dribl.com/d39ed11933784f11acefdf5c93da0b7f
+              alt_image: 
+                type: string
+                example: https://ocean.dribl.com/7102e40b04314e659a17f96045da0741
+              tenantable_name: 
+                type: string
+                example: Football New South Wales
+              tenantable_type: 
+                type: string
+                example: body
+              color: 
+                type: string
+                example: #0C2B6B
+              accent: 
+                type: string
+                example: #69B3E7
+              mc_link: 
+                type: string
+                example: competitions.footballnsw.com.au
+              custom_banner: 
+                type: string
+                example: [location:defaultsize:2000source:https:\/\/ocean.dribl.com\/0ad74ef7567248be8577ff1057f7b0dcupload:false]
+              website: 
+                type: string
+                example: https://footballnsw.com.au/
+              socials: 
+                type: array
+                items: 
+                  type: object
+                  properties:  
+                example: []
+              tenantable_hash_id: 
+                type: string
+                example: 1RwNlWemjr
+          links: 
+            type: object
+            properties: 
+              self: 
+                type: object
+                properties: 
+                  href: 
+                    type: string
+                    example: https://mc-api.dribl.com/api/tenants?tenant=1RwNlWemjr
+
 
 
 
