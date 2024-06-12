@@ -15,7 +15,7 @@ tags:
   description: "Season to be played"
 - name: fixture
   description: "all the fixtures "
-- name: lists
+- name: list
   description: "list entities"  
 
 schemes:
@@ -32,6 +32,7 @@ paths:
       - "multipart/form-data"
       produces:
       - "application/json"
+      parameters:      
       responses:
         '200':
           description: successful operation
@@ -47,35 +48,26 @@ components:
     Season:
       type: object
       properties:
+        type:
+          type: string
+          example: "seasons"
         id:
-          type: integer
-          format: int64
-          example: 10
-        username:
           type: string
-          example: theUser
-        firstName:
+          example: "JR1K3RNQ9M"
+        value: 
           type: string
-          example: John
-        lastName:
+          example: "JR1K3RNQ9M"          
+        title:
           type: string
-          example: James
-        email:
+          example: "Winter 2020"
+        name:
           type: string
-          example: john@email.com
-        password:
-          type: string
-          example: '12345'
-        phone:
-          type: string
-          example: '12345'
-        userStatus:
-          type: integer
-          description: User Status
-          format: int32
-          example: 1
-      xml:
-        name: user  
+          example: "Winter 2020"
+        is_current:
+          type: boolean
+          example: false            
+
+        
     SeasonArray:
       description: List of season object
       content:
