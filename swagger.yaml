@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "trying to reverse engineer the dribl.com public api"
-  title: "mc-api.dribl.com"
+  title: "mc-api.dribl.com - UNOFFICIAL api documentation"
   termsOfService: ""
   contact:
     email: me@example.com 
@@ -101,19 +101,55 @@ paths:
       tags:
       - "clubs"
       - "lists"
-    summary: "queries clubs"
-  
+      summary: "queries clubs"
+      description: "returns club details"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/ClubArray'  
+
   /clubs/{id}:
     get:
       tags:
       - "clubs"
+      summary: "returns club by id"
+      description: "returns club details by id"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+        - name: id        
+          in: path 
+          required: true
+          type: string 
+          description: "season_id"        
 
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Club'
   /list/clubs:
     get:
       tags:
       - "clubs"
       - "lists"
-    summary: "list all clubs"
+      summary: "list all clubs"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/ClubArray'      
 
   /leagues:
     get:
@@ -160,13 +196,27 @@ paths:
     get:
       tags:
       - "grounds"
-    summary: "queries grounds"   
+      summary: "queries grounds"   
 
   /grounds/{id}:
     get:
       tags:
       - "grounds"
-    summary: "queries grounds by id"
+      summary: "queries grounds by id"
+
+  /competitions:
+    get:
+      tags:
+      - "competitions"
+      summary: "queries competitions"
+
+  /competitions/{id}:
+    get:
+      tags:
+      - "competitions"
+      summary: "queries competitions by ID"
+
+#swagger generator: https://roger13.github.io/SwagDefGen/
 
 definitions:
   Season:
@@ -249,3 +299,359 @@ definitions:
               href: 
                 type: string
                 example: "https://mc-api.dribl.com/api/leagues/8nm7Qzv0KO"
+
+  Fixture:
+    type: object 
+    properties:    
+      type: 
+        type: string
+        example: fixtures
+      hash_id: 
+        type: string
+        example: OVdz6ABdGr
+      attributes: 
+        type: object
+        properties: 
+          name: 
+            type: string
+            example: Leichhardt Tigers 35 Division 01 Male A vs Balmain DFC 35 Division 01 Male
+          date: 
+            type: string
+            example: 2020-07-03T09:00:00.000000Z
+          round: 
+            type: string
+            example: R1
+          full_round: 
+            type: string
+            example: Round 1
+          ground_name: 
+            type: string
+            example: Pratten Park
+          ground_latitude: 
+            type: number
+            example: -33.892971
+          ground_longitude: 
+            type: number
+            example: 151.123099
+          ground_address: 
+            type: string
+            format: nullable
+          field_name: 
+            type: string
+            example: Field 1
+          is_historic_field: 
+            type: boolean
+          home_team_name: 
+            type: string
+            example: APIA Leichhardt Tigers Juniors 35 01 Male A
+          home_logo: 
+            type: string
+            example: https://ocean.dribl.com/0b3269b357314914a8898be9c16e2778
+          away_team_name: 
+            type: string
+            example: Balmain DFC 35 01 Male
+          away_logo: 
+            type: string
+            example: https://ocean.dribl.com/02beda303202489592f745009bc53450
+          competition_name: 
+            type: string
+            example: Home and Away
+          league_name: 
+            type: string
+            example: 35 01 Male
+          status: 
+            type: string
+            example: complete
+          bye_flag: 
+            type: boolean
+          is_unstructured: 
+            type: boolean
+          league_result_access: 
+            type: string
+            example: public
+          home_score: 
+            type: integer
+            format: int32
+            example: 5
+          home_score_extra: 
+            type: string
+            format: nullable
+          home_score_penalty: 
+            type: string
+            format: nullable
+          home_score_half: 
+            type: string
+            format: nullable
+          home_score_extra_half: 
+            type: string
+            format: nullable
+          away_score: 
+            type: integer
+            format: int32
+            example: 0
+          away_score_extra: 
+            type: string
+            format: nullable
+          away_score_penalty: 
+            type: string
+            format: nullable
+          away_score_half: 
+            type: string
+            format: nullable
+          away_score_extra_half: 
+            type: string
+            format: nullable
+          allocated_center_referee: 
+            type: boolean
+          allocated_assistant_referee_1: 
+            type: boolean
+          allocated_assistant_referee_2: 
+            type: boolean
+          allocated_fourth_official: 
+            type: boolean
+          allocated_game_leader: 
+            type: boolean
+          referee_count: 
+            type: integer
+            format: int32
+            example: 0
+          enable_referees_allocated: 
+            type: boolean
+          match_hash_id: 
+            type: string
+            example: AnmYzg4rNz
+          forfeit_team_hash_id: 
+            type: string
+            format: nullable
+          home_team_hash_id: 
+            type: string
+            example: wxNxgzwmkp
+          away_team_hash_id: 
+            type: string
+            example: RwNl565Kjr
+
+  Field:
+    type: object 
+    properties: 
+      type: 
+        type: string
+        example: fields
+      hash_id: 
+        type: string
+        example: gld4JroBNW
+      attributes: 
+        type: object
+        properties: 
+          name: 
+            type: string
+            example: Main
+          code: 
+            type: string
+            example: 59081-FMPMN
+          description: 
+            type: string
+            format: nullable
+          ground_hash_id: 
+            type: string
+            example: vbd9v3n8m4
+          parent_field_hash_id: 
+            type: string
+            format: nullable
+          field_type_hash_id: 
+            type: string
+            example: JR1K3RNQ9M
+          tenant_hash_id: 
+            type: string
+            example: 3pmvvjLmvJ
+          season_hash_id: 
+            type: string
+            example: 1pN6PP0d0g
+          field_type: 
+            type: object
+            properties: 
+              hash_id: 
+                type: string
+                example: JR1K3RNQ9M
+              name: 
+                type: string
+                example: Full Field
+              slug: 
+                type: string
+                example: full
+      links: 
+        type: object
+        properties: 
+          self: 
+            type: object
+            properties: 
+              href: 
+                type: string
+                example: https://mc-api.dribl.com/api/grounds/gld4JroBNW
+                description: the self link does not seem to work as a field_id is used in a ground api!!
+
+
+  Ground:
+    type: object 
+    properties:        
+      type: 
+        type: string
+        example: clubs
+      hash_id: 
+        type: string
+        example: vbd9v3n8m4
+      value: 
+        type: string
+        example: vbd9v3n8m4
+      title: 
+        type: string
+        example: 1Solution - Frank Mitchell Park
+      name: 
+        type: string
+        example: 1Solution - Frank Mitchell Park
+      attributes: 
+        type: object
+        properties: 
+          name: 
+            type: string
+            example: 1Solution - Frank Mitchell Park
+          latitude: 
+            type: number
+            example: -34.887794
+          longitude: 
+            type: number
+            example: 138.521234
+          address: 
+            type: string
+            example: Agnes St-Seaton SA 5023
+          location: 
+            type: string
+            format: nullable
+          fields: 
+            type: array
+            items: 
+              $ref: '#/definitions/Field'
+      links: 
+        type: object
+        properties: 
+          self: 
+            type: object
+            properties: 
+              href: 
+                type: string
+                example: https://mc-api.dribl.com/api/grounds/vbd9v3n8m4
+
+  Club: 
+    type: object
+    properties:
+      type: 
+        type: string
+        example: clubs
+      id: 
+        type: string
+        example: RwNlozYmjr
+      attributes: 
+        type: object
+        properties: 
+          name: 
+            type: string
+            example: 1836 Adelaide
+          slug: 
+            type: string
+            format: nullable
+          image: 
+            type: string
+            example: https://ocean.dribl.com/44bb78c89af34b97be5b1949604a4267
+          alt_image: 
+            type: string
+            format: nullable
+          phone: 
+            type: string
+            format: nullable
+          email: 
+            type: string
+            example: me@example.com
+          email_address: 
+            type: string
+            example: me@example.com
+          url: 
+            type: string
+            format: nullable
+          color: 
+            type: string
+            example: "#303030"
+          accent: 
+            type: string
+            example: "#FEC530"
+          address: 
+            type: object
+            properties: 
+              address_line_1: 
+                type: string
+                format: nullable
+              address_line_2: 
+                type: string
+                format: nullable
+              city: 
+                type: string
+                format: nullable
+              state: 
+                type: string
+                example: SA
+              country: 
+                type: string
+                format: nullable
+              postcode: 
+                type: string
+                format: nullable
+          socials: 
+            type: array
+            items: 
+              type: object
+              properties:  
+            example: []
+          store: 
+            type: string
+            example: /club/3503
+          grounds: 
+            type: string
+            format: nullable
+      links: 
+        type: object
+        properties: 
+          self: 
+            type: object
+            properties: 
+              href: 
+                type: string
+                example: https://mc-api.dribl.com/api/clubs/RwNlozYmjr
+
+
+
+  ClubArray:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Club'
+
+
+
+  meta_block_cursor:
+    type: object
+    properties:
+      path: 
+        type: string
+        example: https://mc-api.dribl.com/api/endpoint
+      per_page: 
+        type: number
+        example: 30
+        description: optional page size indicator
+      next_cusror: 
+        type: string
+        example: eyJjb21wZXRpdGlvbnMub3JkZXIiOm51bGwsImNvbXBldGl0aW9ucy5uYW1lIjoiQXVzdHJhbGlhIEN1cCIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
+        format: nullable
+      prev_cusror: 
+        type: string
+        example: eyJjb21wZXRpdGlvbnMub3JkZXIiOm51bGwsImNvbXBldGl0aW9ucy5uYW1lIjoiQXVzdHJhbGlhIEN1cCIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
+        format: nullable        
