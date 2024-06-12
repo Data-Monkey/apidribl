@@ -13,3 +13,9 @@ info:
 host: "mc-api.dribl.com"
 basePath: "/api"
 
+tags:
+- name: "season"
+  description: "Season to be played"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
