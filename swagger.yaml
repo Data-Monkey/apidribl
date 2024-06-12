@@ -23,7 +23,7 @@ schemes:
 
 paths:
   /list/seasons:
-    post:
+    get:
       tags:
       - "season"
       summary: "list all seasons"
