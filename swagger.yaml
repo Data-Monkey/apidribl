@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "trying to reverse engineer the dribl.com public api"
-  title: "api.dribl.com"
+  title: "mc-api.dribl.com"
   termsOfService: ""
   contact:
     email: me@example.com 
@@ -12,11 +12,11 @@ basePath: "/api"
 
 tags:
 - name: clubs
-  description: "all the clubs "  
+  description: "all about the clubs "  
 - name: "season"
-  description: "Season to be played"
+  description: "all about the seasons"
 - name: fixture
-  description: "all the fixtures "
+  description: "all about the fixtures "
 - name: lists
   description: "listing entities"
 
@@ -94,12 +94,7 @@ paths:
           schema:
             $ref: '#/definitions/SeasonArray'  
 
-  /list/clubs:
-    get:
-      tags:
-      - "clubs"
-      - "lists"
-    summary: "list all clubs"
+
 
   /clubs:
     get:
@@ -112,6 +107,13 @@ paths:
     get:
       tags:
       - "clubs"
+
+  /list/clubs:
+    get:
+      tags:
+      - "clubs"
+      - "lists"
+    summary: "list all clubs"
 
   /leagues:
     get:
@@ -130,6 +132,29 @@ paths:
           schema:
             $ref: '#/definitions/League'  
 
+
+  /ladders:
+    get:
+      tags:
+      - "ladders"
+      summary: "queries ladders"
+      parameters:
+        - in: query 
+          name: league
+          required: true
+          type: string 
+          description: "league_id"
+  /ladders/{id}:
+    get:
+      tags:
+      - "ladders"
+      summary: "queries ladders"
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string 
+          description: "ladder_entry_id"          
 
 definitions:
   Season:
