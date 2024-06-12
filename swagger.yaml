@@ -1,12 +1,12 @@
----
 swagger: "2.0"
 info:
   description: "trying to reverse engineer the dribl.com public api"
   title: "api.dribl.com"
   termsOfService: ""
   contact:
-    email: ""
-  license:
+    email: me@example.com 
+    name: me
+  version: "0.1"
 host: "mc-api.dribl.com"
 basePath: "/api"
 
@@ -34,44 +34,39 @@ paths:
       parameters:      
       responses:
         '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Season'  
-
-
-
-components:
-  schemas:
-    Season:
-      type: object
-      properties:
-        type:
-          type: string
-          example: "seasons"
-        id:
-          type: string
-          example: "JR1K3RNQ9M"
-        value: 
-          type: string
-          example: "JR1K3RNQ9M"          
-        title:
-          type: string
-          example: "Winter 2020"
-        name:
-          type: string
-          example: "Winter 2020"
-        is_current:
-          type: boolean
-          example: false            
-
-        
-    SeasonArray:
-      description: List of season object
-      content:
-        application/json:
+          description: 'successful operation'
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Season'
+            $ref: '#/definitions/SeasonArray'  
+
+
+
+definitions:
+  Season:
+    type: object
+    properties:
+      type:
+        type: string
+        example: "seasons"
+      id:
+        type: string
+        example: "JR1K3RNQ9M"
+      value: 
+        type: string
+        example: "JR1K3RNQ9M"
+      title:
+        type: string
+        example: "Winter 2020"
+      name:
+        type: string
+        example: "Winter 2020"
+      is_current:
+        type: boolean
+        example: false
+
+  SeasonArray:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Season'
