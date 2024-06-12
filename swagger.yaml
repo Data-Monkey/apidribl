@@ -156,6 +156,18 @@ paths:
           type: string 
           description: "ladder_entry_id"          
 
+  /grounds:
+    get:
+      tags:
+      - "grounds"
+    summary: "queries grounds"   
+
+  /grounds/{id}:
+    get:
+      tags:
+      - "grounds"
+    summary: "queries grounds by id"
+
 definitions:
   Season:
     type: object
