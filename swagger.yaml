@@ -13,9 +13,10 @@ basePath: "/api"
 tags:
 - name: "season"
   description: "Season to be played"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
+- name: fixture
+  description: "all the fixtures "
+- name: lists
+  description: "list entities"  
 
 schemes:
 - "https"
@@ -31,3 +32,10 @@ paths:
       - "multipart/form-data"
       produces:
       - "application/json"
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/season'  
