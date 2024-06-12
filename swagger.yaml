@@ -2,14 +2,11 @@
 swagger: "2.0"
 info:
   description: "trying to reverse engineer the dribl.com public api"
-  version: "1.0.5"
   title: "api.dribl.com"
   termsOfService: ""
   contact:
     email: ""
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "mc-api.dribl.com"
 basePath: "/api"
 
@@ -19,3 +16,18 @@ tags:
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
+
+schemes:
+- "https"
+
+paths:
+  /list/seasons:
+    post:
+      tags:
+      - "season"
+      summary: "list all seasons"
+      description: "list all seasons"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
