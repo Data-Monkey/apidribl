@@ -2,33 +2,8 @@ swagger: "2.0"
 info:
 
   title: "mc-api.dribl.com - UNOFFICIAL api documentation"
-  description: "trying to reverse engineer the dribl.com public api \n
-  the dribl app has many concepts that need to be related to each other. \n
-  * tenant
-
-  * league
+  description: "trying to reverse engineer the dribl com public api"
   
-  * club
-  
-  * team
-  
-  * ground
-  
-  * field
-  
-  * fixture
-  
-  * match
-  
-  * result 
-  
-  * ladder
-  
-  * competition
-
-
-I am still working out the relationships ...
-  "
   termsOfService: ""
   contact:
     email: me@example.com 
@@ -53,7 +28,11 @@ tags:
 schemes:
 - "https"
 
+# API ENDPOINTS 
+
 paths:
+
+#------ SEASONS ------
   /seasons:
     get:
       tags:
@@ -65,23 +44,23 @@ paths:
       produces:
       - "application/json"
       parameters:
-        - in: query
-          name: disable_paging
+        - name: disable_paging
+          in: query
           required: false
           type: boolean 
           description: "disable result pagination \n deault page size: 100"
 
-        - in: query
-          name: page
-          required: false
-          type: integer
-          description: "page selection - only available if disable_paging = false"
-
+        - $ref: '#/components/page_parameter'
       responses:
-        '200':
+        200:
           description: 'successful operation'
           schema:
-            $ref: '#/definitions/SeasonArray'  
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Season'            
 
   /seasons/{id}:
     get:
@@ -98,13 +77,16 @@ paths:
           name: id
           required: true
           type: string 
-          description: "season_id"        
-
+          description: "season_id"
       responses:
         '200':
           description: 'successful operation'
           schema:
-            $ref: '#/definitions/Season'
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Season'          
+
 
   /list/seasons:
     get:
@@ -121,9 +103,12 @@ paths:
         '200':
           description: 'successful operation'
           schema:
-            $ref: '#/definitions/SeasonArray'  
-
-
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/schemas/Season' 
 
   /clubs:
     get:
@@ -140,7 +125,13 @@ paths:
         '200':
           description: 'successful operation'
           schema:
-            $ref: '#/definitions/ClubArray'  
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Club'            
+
 
   /clubs/{id}:
     get:
@@ -213,6 +204,12 @@ paths:
           required: true
           type: string 
           description: "league_id"
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Ladder'  
+
   /ladders/{id}:
     get:
       tags:
@@ -228,6 +225,11 @@ paths:
           required: true
           type: string 
           description: "ladder_entry_id"          
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Ladder'
 
   /grounds:
     get:
@@ -238,6 +240,17 @@ paths:
       - "multipart/form-data"
       produces:
       - "application/json"
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items: 
+                  $ref: '#/definitions/Ground'
+
   /grounds/{id}:
     get:
       tags:
@@ -260,9 +273,9 @@ paths:
             type: object
             properties:
               data:
-                type: array
-                items: 
-                  $ref: '#/definitions/Ground'
+                type: object
+                properties:
+
 
   /competitions:
     get:
@@ -272,7 +285,17 @@ paths:
       consumes:
       - "multipart/form-data"
       produces:
-      - "application/json"      
+      - "application/json"
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Competition'             
 
   /competitions/{id}:
     get:
@@ -289,6 +312,14 @@ paths:
           required: true
           type: string 
           description: "competition_id" 
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Competition'             
 
   /tenants:
     get:
@@ -321,6 +352,7 @@ definitions:
       type:
         type: string
         example: "seasons"
+        description: always set to 'seasons'
       id:
         type: string
         example: "JR1K3RNQ9M"
@@ -345,14 +377,6 @@ definitions:
               href: 
                 type: string
                 example: "https://mc-api.dribl.com/api/seasons/JR1K3RNQ9M"
-
-  SeasonArray:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/Season'
 
   League:
     type: object 
@@ -588,11 +612,11 @@ definitions:
 
   Ground:
     type: object 
-    properties:        
-      type: 
+    properties:
+      type:
         type: string
-        values: clubs
-        description: ERROR in implentation, should be set to grounds!!
+        example: clubs
+        description: always set to clubs but that is an ERROR in implentation, should be set to grounds!!
       hash_id: 
         type: string
         example: vbd9v3n8m4
@@ -803,7 +827,7 @@ definitions:
 
 
 
-  meta_block_cursor:
+  meta:
     type: object
     properties:
       path: 
@@ -821,3 +845,11 @@ definitions:
         type: string
         example: eyJjb21wZXRpdGlvbnMub3JkZXIiOm51bGwsImNvbXBldGl0aW9ucy5uYW1lIjoiQXVzdHJhbGlhIEN1cCIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
         format: nullable        
+
+components:
+  page_parameter:
+    name: page
+    in: query
+    required: false
+    type: integer
+    description: "page selection - only available if disable_paging = false"    
