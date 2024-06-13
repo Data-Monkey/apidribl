@@ -2,7 +2,8 @@ swagger: "2.0"
 info:
 
   title: "mc-api.dribl.com - UNOFFICIAL api documentation"
-  description: "trying to reverse engineer the dribl com public api"
+  description: "trying to reverse engineer the dribl com public api \n \n
+  __BUT THE API IS BEHIND CLOUDFLARE PROTECTION AND CANT BE USED WITH PYTHON SO I LOST INTEREST__"
   
   termsOfService: ""
   contact:
