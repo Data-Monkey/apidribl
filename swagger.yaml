@@ -21,8 +21,6 @@ tags:
   description: "Fixtures are matches "
 - name: grounds
   description: "Grounds are a collection of Fields "  
-- name: lists
-  description: "listing entities"
 
 
 schemes:
@@ -92,7 +90,6 @@ paths:
     get:
       tags:
       - "season"
-      - "lists"
       summary: "list all seasons"
       consumes:
       - "multipart/form-data"
@@ -110,11 +107,11 @@ paths:
                 items:
                   $ref: '#/definitions/schemas/Season' 
 
+#------ CLUBS ------
   /clubs:
     get:
       tags:
       - "clubs"
-      - "lists"
       summary: "queries clubs"
       description: "returns club details"
       consumes:
@@ -159,7 +156,6 @@ paths:
     get:
       tags:
       - "clubs"
-      - "lists"
       summary: "list all clubs"
       consumes:
       - "multipart/form-data"
@@ -171,6 +167,7 @@ paths:
           schema:
             $ref: '#/definitions/ClubArray'      
 
+#------ LEAGUES ------
   /leagues:
     get:
       tags:
@@ -230,7 +227,7 @@ paths:
           description: 'successful operation'
           schema:
             $ref: '#/definitions/Ladder'
-
+#------ GROUNDS ------
   /grounds:
     get:
       tags:
@@ -275,8 +272,7 @@ paths:
               data:
                 type: object
                 properties:
-
-
+#------ COMPETITIONS ------
   /competitions:
     get:
       tags:
@@ -321,6 +317,7 @@ paths:
               data:
                 $ref: '#/definitions/Competition'             
 
+#------ TENANTS ------
   /tenants:
     get:
       tags:
@@ -340,9 +337,58 @@ paths:
         '200':
           description: 'successful operation'
           schema:
-            $ref: '#/definitions/Tenant'  
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Tenant'  
+#------ FIXTURES ------
+  /fixtures:
+    get:
+      tags:
+      - "fixture"
+      summary: "queries fixture / matches"  
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
+      parameters: 
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Fixture'
+
+  /fixtures/{id}:
+    get:
+      tags:
+      - "fixture"
+      summary: "queries fixture / matches"  
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"      
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          type: string 
+          description: "fixture_id" 
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/Fixture'
 
 
+#------ SCHEMA DEFINITIONS ------
 #swagger generator: https://roger13.github.io/SwagDefGen/
 
 definitions:
@@ -661,6 +707,7 @@ definitions:
                 type: string
                 example: https://mc-api.dribl.com/api/grounds/vbd9v3n8m4
 
+
   Club: 
     type: object
     properties:
@@ -748,19 +795,10 @@ definitions:
 
 
 
-  ClubArray:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/Club'
+
 
 
   Tenant: 
-    type: object
-    properties:
-      data: 
         type: object
         properties: 
           type: 
@@ -824,7 +862,64 @@ definitions:
                     type: string
                     example: https://mc-api.dribl.com/api/tenants?tenant=1RwNlWemjr
 
+  CompetitionLeague:
+    type: object
+    properties: 
+      id: 
+        type: string
+        example: eRdkVngaKG
+      value: 
+        type: string
+        example: eRdkVngaKG
+      name: 
+        type: string
+        example: 23 Senior Men's Trial Matches
+      image: 
+        type: string
+        format: nullable
+      fixture_access: 
+        type: string
+        example: public
+      result_access: 
+        type: string
+        example: public
+      ladder_access: 
+        type: string
+        example: body
 
+
+
+  Competition:
+    type: object 
+    properties:
+      type: 
+        type: string
+        example: competitions
+      id: 
+        type: string
+        example: 8BdVZP0dE5
+      attributes: 
+        type: object
+        properties: 
+          name: 
+            type: string
+            example: 2023 Trial Matches
+          order: 
+            type: string
+            format: nullable
+          leagues: 
+            type: array
+            items: 
+              $ref: '#/definitions/CompetitionLeague'
+      links: 
+        type: object
+        properties: 
+          self: 
+            type: object
+            properties: 
+              href: 
+                type: string
+                example: https://mc-api.dribl.com/api/competitions/8BdVZP0dE5
 
 
   meta:
