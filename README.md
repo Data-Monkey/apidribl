@@ -12,7 +12,7 @@ the dribl app has many concepts that need to be related to each other.
 erDiagram
     Club ||--o{ Team : has
     Ground ||--o{ Field : has
-    Tenant ||--o{ Field : owns
+    Tenant ||--o{ Ground : uses
     Tenant ||--o{ Club  : assosiation_of
     Team }|..|{ Field : plays_on
     Competition ||--o{ League : has
@@ -22,10 +22,11 @@ erDiagram
     Fixture ||--o{ Field : plays_on
     Ladder ||--o{ Ladder_Entry : has
     Ladder_Entry ||--o{ Match : has_recent
-    Season  ||--o{ Competition   : has
-    League ||--o{ Round   : has
+    Season  ||--{ Competition   : has
+    League ||--{ Round   : has
     Club ||--|| Ground : home_ground
     Round ||--o{ Fixture : has
+    Tenant ||--{ Season : manages
 ```
 
 
