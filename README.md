@@ -18,7 +18,8 @@ erDiagram
     Season
     League
     Fixture
-    Ladder
+    Ladder ||--o{ Ladder_Entry
+    
 ```
 
 

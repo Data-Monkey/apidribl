@@ -1,0 +1,6 @@
+# social details list entry
+type: object
+properties:   
+  social_detail: 
+    type: string
+    example: "facebook ID"
