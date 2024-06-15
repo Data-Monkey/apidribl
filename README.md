@@ -14,19 +14,19 @@ erDiagram
     Ground ||--o{ Field : has
     Tenant ||--o{ Ground : uses
     Tenant ||--o{ Club  : assosiation_of
-    Team }|..|{ Field : plays_on
+    Team }|--|{ Field : plays_on
     Competition ||--o{ League : has
-    League }|..|{ Team : has
+    League }|--|{ Team : has
     League ||--o{ Ladder : has
     Fixture ||--o{ Match : has
     Fixture ||--o{ Field : plays_on
     Ladder ||--o{ Ladder_Entry : has
     Ladder_Entry ||--o{ Match : has_recent
-    Season  ||--{ Competition   : has
-    League ||--{ Round   : has
+    Season  ||--|{ Competition   : has
+    League ||--|{ Round   : has
     Club ||--|| Ground : home_ground
     Round ||--o{ Fixture : has
-    Tenant ||--{ Season : manages
+    Tenant ||--|{ Season : manages
 ```
 
 
