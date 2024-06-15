@@ -1,7 +1,10 @@
 # social details list entry
-description: "no examples of socials have been found yet, this is a guess"
+description: "social media links"
 type: object
 properties:
-  social_detail: 
+  name: 
     type: string
-    example: "facebook ID"
+    example: "facebook"
+  value: 
+    type: string
+    example: https://www.facebook.com/HarbordFC

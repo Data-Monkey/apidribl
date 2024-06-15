@@ -15,14 +15,15 @@ erDiagram
     Tenant ||--o{ Field : owns
     Tenant ||--o{ Club  : assosiation_of
     Team }|..|{ Field : plays_on
-    Competition
-    Season
+    Competition ||--o{ League : has
+    League }|..|{ Team : has
     League ||--o{ Ladder : has
     Fixture ||--o{ Match : has
     Fixture ||--o{ Field : plays_on
     Ladder ||--o{ Ladder_Entry : has
     Ladder_Entry ||--o{ Match : has_recent
-    
+    Season  ||--o{ Competition   : has
+    League ||--o{ Round   : has
 ```
 
 

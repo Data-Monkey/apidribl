@@ -1,4 +1,4 @@
-description: I suspect a Tenant represents the association. A group of clubs managed by the same association.
+description: A Tenant represents the association. A group of clubs managed by the same association.
 type: object
 properties: 
   type: 

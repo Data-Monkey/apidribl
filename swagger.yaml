@@ -11,19 +11,19 @@ externalDocs:
 
 servers:
   - url: https://mc-api.dribl.com/api
-    description: Dribl API host 
+    description: Dribl API host
 
 tags:
 - name: clubs
-  description: "Clubs have multiple teams "  
+  description: "Clubs have multiple teams "
 - name: "season"
   description: "all about the seasons"
 - name: fixture
   description: "Fixtures are matches "
 - name: grounds
-  description: "Grounds are a collection of Fields "  
+  description: "Grounds are a collection of Fields "
 
-# API ENDPOINTS 
+# API ENDPOINTS
 
 paths:
 
@@ -39,7 +39,7 @@ paths:
           in: query
           required: false
           schema:
-            type: boolean 
+            type: boolean
           description: "disable result pagination \n deault page size: 100"
         - $ref: '#/components/parameters/page_parameter'
       responses:
@@ -53,7 +53,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Season'            
+                      $ref: '#/components/schemas/Season'
 
   /seasons/{season_id}:
     get:
@@ -67,7 +67,7 @@ paths:
           required: true
           schema:
             type: string
-          description: The hash ID of the season     
+          description: The hash ID of the season
       responses:
         '200':
           description: 'successful operation'
@@ -77,7 +77,7 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Season'          
+                    $ref: '#/components/schemas/Season'
 
 
   /list/seasons:
@@ -96,7 +96,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Season' 
+                      $ref: '#/components/schemas/Season'
 
 #------ CLUBS ------
   /clubs:
@@ -116,7 +116,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Club'            
+                      $ref: '#/components/schemas/Club'
 
 
   /clubs/{club_id}:
@@ -126,12 +126,12 @@ paths:
       summary: "returns club by id"
       description: "returns club details by id"
       parameters:
-        - name: club_id        
-          in: path 
+        - name: club_id
+          in: path
           required: true
           schema:
-            type: string 
-          description: "season_id"        
+            type: string
+          description: "season_id"
 
       responses:
         '200':
@@ -141,10 +141,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Club'
   /list/clubs:
+    #https://mc-api.dribl.com/api/clubs?tenant=kbam1QjmwX
+    #https://mc-api.dribl.com/api/clubs?season=bam14vjdwX&date_range=default&timezone=Australia%2FSydney
     get:
       tags:
       - "clubs"
       summary: "list all clubs"
+      parameters:
+        - name: season
+          in: query
+          required: false
+          schema:
+            type: string
+          description: "season_id"
       responses:
         '200':
           description: 'successful operation'
@@ -156,7 +165,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Club'         
+                      $ref: '#/components/schemas/Club'
 
 #------ LEAGUES ------
   /leagues:
@@ -171,20 +180,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/League'  
+                $ref: '#/components/schemas/League'
 
 
   /ladders:
     get:
       tags:
       - "ladders"
-      summary: "queries ladders"     
+      summary: "queries ladders"
       parameters:
-        - in: query 
+        - in: query
           name: league
           required: true
-          schema: 
-            type: string 
+          schema:
+            type: string
           description: "league_id"
       responses:
         '200':
@@ -192,20 +201,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Ladder'  
+                $ref: '#/components/schemas/Ladder'
 
   /ladders/{ladder_entry_id}:
     get:
       tags:
       - "ladders"
-      summary: "queries ladders"   
-      parameters: 
+      summary: "queries ladders"
+      parameters:
         - name: ladder_entry_id
           in: path
           required: true
           schema:
-            type: string 
-          description: "hash ID of the ladder_entry"          
+            type: string
+          description: "hash ID of the ladder_entry"
       responses:
         '200':
           description: 'successful operation'
@@ -229,20 +238,20 @@ paths:
                 properties:
                   data:
                     type: array
-                    items: 
+                    items:
                       $ref: '#/components/schemas/Ground'
 
   /grounds/{ground_id}:
     get:
       tags:
       - "grounds"
-      summary: "queries grounds by id"    
-      parameters: 
+      summary: "queries grounds by id"
+      parameters:
         - name: ground_id
           in: path
           required: true
           schema:
-            type: string 
+            type: string
           description: "hash of the ground_id"
       responses:
         '200':
@@ -254,7 +263,7 @@ paths:
                 properties:
                   data:
                     type: array
-                    items: 
+                    items:
                       $ref: '#/components/schemas/Ground'
 
 #------ COMPETITIONS ------
@@ -263,6 +272,14 @@ paths:
       tags:
       - "competitions"
       summary: "queries competitions"
+      parameters:
+        - name: tenant
+          in: query
+          required: false
+          schema:
+            type: string
+            description: hash string of the tenant
+          description: "tenant"
       responses:
         '200':
           description: 'successful operation'
@@ -280,15 +297,15 @@ paths:
     get:
       tags:
       - "competitions"
-      summary: "queries competitions by ID"    
-      parameters: 
+      summary: "queries competitions by ID"
+      parameters:
         - name: competition_id
           in: path
           required: true
           schema:
-            type: string 
+            type: string
             description: hash string
-          description: "competition_id" 
+          description: "competition_id"
       responses:
         '200':
           description: 'successful operation'
@@ -302,17 +319,25 @@ paths:
 
 #------ TENANTS ------
   /tenants:
+    # https://mc-api.dribl.com/api/tenants?mc_link=acnsw.dribl.com&slug=acnsw
     get:
       tags:
       - "tenants"
-      summary: "queries tenants"       
-      parameters: 
+      summary: "queries tenants"
+      parameters:
         - name: tenant_id
           in: query
-          required: true
+          required: false
           schema:
-            type: string 
-          description: "ID of the enity" 
+            type: string
+          description: "ID of the enity"
+        - name: slug
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Short name of the association. ie mwfa for Manly Warringha Football Association
+
       responses:
         '200':
           description: 'successful operation'
@@ -322,13 +347,20 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Tenant'  
+                    $ref: '#/components/schemas/Tenant'
 #------ FIXTURES ------
   /fixtures:
+    # https://mc-api.dribl.com/api/fixtures?date_range=all&season=R1K3pzOdQ9&tenant=kbam1QjmwX&timezone=Australia%2FSydney
+    # https://mc-api.dribl.com/api/fixtures-clubs?date_range=date-range&date[]=2024-06-15&date[]=2024-06-17&season=3vmZpnGKq5&competition=R3NPZlPdr4&league=8RmwZnxjdE&tenant=kbam1QjmwX&timezone=Australia%2FSydney
     get:
       tags:
       - "fixture"
-      summary: "queries fixture / matches"     
+      summary: "queries fixture / matches"
+      parameters:
+        - $ref: '#/components/parameters/competition_query'
+        - $ref: '#/components/parameters/tenant_query'
+        - $ref: '#/components/parameters/season_query'
+        - $ref: '#/components/parameters/league_query'
       responses:
         '200':
           description: 'successful operation'
@@ -346,14 +378,14 @@ paths:
     get:
       tags:
       - "fixture"
-      summary: "queries fixture / matches"      
-      parameters: 
+      summary: "queries fixture / matches"
+      parameters:
         - name: id
           in: path
           required: true
           schema:
-            type: string 
-          description: "fixture_id" 
+            type: string
+          description: "fixture_id"
       responses:
         '200':
           description: 'successful operation'
@@ -366,12 +398,20 @@ paths:
                     $ref: '#/components/schemas/Fixture'
 
 
+  # /links:
+  #   description: don't know what is does
+  #   example: https://mc-api.dribl.com/api/links?linkable_type=tenant&tenant=gld45b2mW5
+
+  # /sponsors:
+  # https://mc-api.dribl.com/api/sponsors?sponsorable_type=tenant&tenant=gld45b2
+  # https://mc-api.dribl.com/api/sponsor-levels?sponsorable_type=tenant&tenant=gld45b2mW5
+
 #------ SCHEMA DEFINITIONS ------
 #swagger generator: https://roger13.github.io/SwagDefGen/
 
 components:
   schemas:
-    Match: 
+    Match:
       $ref: 'swagger/components/schemas/Match.yaml'
     Season:
       $ref: 'swagger/components/schemas/Season.yaml'
@@ -381,9 +421,9 @@ components:
       $ref: "swagger/components/schemas/Fixture.yaml"
     Ground:
       $ref: "swagger/components/schemas/Ground.yaml"
-    Club: 
+    Club:
       $ref: "swagger/components/schemas/Club.yaml"
-    Tenant: 
+    Tenant:
       $ref: "swagger/components/schemas/Tenant.yaml"
     Competition:
       $ref: "swagger/components/schemas/Competition.yaml"
@@ -391,28 +431,28 @@ components:
       $ref: "swagger/components/schemas/Ladder.yaml"
     # Ladder_Entry:
     #   $ref: "swagger/components/schemas/Ladder_Entry.yaml"
-    
+
     meta:
       type: object
       properties:
-        path: 
+        path:
           type: string
           example: https://mc-api.dribl.com/api/endpoint
-        per_page: 
+        per_page:
           type: number
           example: 30
           description: optional page size indicator
-        next_cusror: 
+        next_cusror:
           type: string
           example: eyJjb21wZXRpdGlvbnMub3JkZXIiOm51bGwsImNvbXBldGl0aW9ucy5uYW1lIjoiQXVzdHJhbGlhIEN1cCIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
           format: nullable
-        prev_cusror: 
+        prev_cusror:
           type: string
           example: eyJjb21wZXRpdGlvbnMub3JkZXIiOm51bGwsImNvbXBldGl0aW9ucy5uYW1lIjoiQXVzdHJhbGlhIEN1cCIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0
-          format: nullable        
+          format: nullable
 
 
-  parameters: 
+  parameters:
     page_parameter:
       name: page
       in: query
@@ -420,3 +460,35 @@ components:
       schema:
         type: integer
       description: "page selection - only available if disable_paging = false"
+
+    tenant_query:
+      name: tenant
+      in: query
+      required: false
+      schema:
+        type: string
+      description: tenant_id
+
+    competition_query:
+      name: competition
+      in: query
+      required: false
+      schema:
+        type: string
+      description: competition_id
+
+    league_query:
+      name: league
+      in: query
+      required: false
+      schema:
+        type: string
+      description: league_id
+
+    season_query:
+      name: season
+      in: query
+      required: false
+      schema:
+        type: string
+      description: season_id
