@@ -71,15 +71,14 @@ paths:
                   data:
                     $ref: '#/components/schemas/Season'
 
-
   /list/seasons:
+    description: lists seasons, no paging 
     get:
       tags:
       - "season"
       summary: "returns seasons"
       parameters:
-        - $ref: '#/components/parameters/query_tenant'    
-        - $ref: '#/components/parameters/query_paging'             
+        - $ref: '#/components/parameters/query_tenant'        
       responses:
         '200':
           description: 'successful operation'
@@ -116,7 +115,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Club'
-
 
   /clubs/{id}:
     get:
@@ -175,7 +173,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/League'
-
 
   /ladders:
     get:

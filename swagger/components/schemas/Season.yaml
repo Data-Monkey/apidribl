@@ -16,6 +16,9 @@
         name:
           type: string
           example: "Winter 2020"
+        year:
+          type: number
+          example: 2020
         is_current:
           type: boolean
           example: false
