@@ -1,0 +1,130 @@
+description: A fixture is a game in one round of a league. It can be a future event or already completed.
+type: object 
+properties:    
+  type: 
+    type: string
+    description: always set to "fixtures"
+    example: fixtures
+  hash_id: 
+    type: string
+    example: OVdz6ABdGr
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: Leichhardt Tigers 35 Division 01 Male A vs Balmain DFC 35 Division 01 Male
+      date: 
+        type: string
+        example: 2020-07-03T09:00:00.000000Z
+      round: 
+        type: string
+        example: R1
+      full_round: 
+        type: string
+        example: Round 1
+      ground_name: 
+        type: string
+        example: Pratten Park
+      ground_latitude: 
+        type: number
+        example: -33.892971
+      ground_longitude: 
+        type: number
+        example: 151.123099
+      ground_address: 
+        type: string
+        format: nullable
+      field_name: 
+        type: string
+        example: Field 1
+      is_historic_field: 
+        type: boolean
+      home_team_name: 
+        type: string
+        example: APIA Leichhardt Tigers Juniors 35 01 Male A
+      home_logo: 
+        type: string
+        example: https://ocean.dribl.com/0b3269b357314914a8898be9c16e2778
+      away_team_name: 
+        type: string
+        example: Balmain DFC 35 01 Male
+      away_logo: 
+        type: string
+        example: https://ocean.dribl.com/02beda303202489592f745009bc53450
+      competition_name: 
+        type: string
+        example: Home and Away
+      league_name: 
+        type: string
+        example: 35 01 Male
+      status: 
+        type: string
+        example: complete
+      bye_flag: 
+        type: boolean
+      is_unstructured: 
+        type: boolean
+      league_result_access: 
+        type: string
+        example: public
+      home_score: 
+        type: integer
+        format: int32
+        example: 5
+      home_score_extra: 
+        type: string
+        format: nullable
+      home_score_penalty: 
+        type: string
+        format: nullable
+      home_score_half: 
+        type: string
+        format: nullable
+      home_score_extra_half: 
+        type: string
+        format: nullable
+      away_score: 
+        type: integer
+        format: int32
+        example: 0
+      away_score_extra: 
+        type: string
+        format: nullable
+      away_score_penalty: 
+        type: string
+        format: nullable
+      away_score_half: 
+        type: string
+        format: nullable
+      away_score_extra_half: 
+        type: string
+        format: nullable
+      allocated_center_referee: 
+        type: boolean
+      allocated_assistant_referee_1: 
+        type: boolean
+      allocated_assistant_referee_2: 
+        type: boolean
+      allocated_fourth_official: 
+        type: boolean
+      allocated_game_leader: 
+        type: boolean
+      referee_count: 
+        type: integer
+        format: int32
+        example: 0
+      enable_referees_allocated: 
+        type: boolean
+      match_hash_id: 
+        type: string
+        example: AnmYzg4rNz
+      forfeit_team_hash_id: 
+        type: string
+        format: nullable
+      home_team_hash_id: 
+        type: string
+        example: wxNxgzwmkp
+      away_team_hash_id: 
+        type: string
+        example: RwNl565Kjr

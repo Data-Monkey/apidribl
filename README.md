@@ -16,9 +16,12 @@ erDiagram
     Team }|..|{ Field : plays_on
     Competition
     Season
-    League
-    Fixture
-    Ladder ||--o{ Ladder_Entry
+    League ||--o{ Ladder : has
+    Fixture ||--o{ Match : has
+    Fixture ||--o{ Field : plays_on
+    Ladder ||--o{ Ladder_Entry : has
+    Ladder_Entry ||--o{ Recent_Matches : has
+    Recent_Matches ||--o{ Matches : has
     
 ```
 

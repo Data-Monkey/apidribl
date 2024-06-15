@@ -2,10 +2,15 @@ openapi: "3.0.0"
 info:
   title: "mc-api.dribl.com - UNOFFICIAL api documentation"
   description: "trying to reverse engineer the dribl com public api \n \n __BUT THE API IS BEHIND CLOUDFLARE PROTECTION AND CANT BE USED WITH PYTHON SO I LOST INTEREST__"
-  version: "0.1"
+  version: "2024-06 experimental"
+
+externalDocs:
+  description: Find out more on my github page
+  url: https://github.com/Data-Monkey/apidribl
+
 
 servers:
-  - url: http://mc-api.dribl.com/api/"
+  - url: http://mc-api.dribl.com/api
     description: Dribl API host 
 
 tags:
@@ -36,7 +41,6 @@ paths:
           schema:
             type: boolean 
           description: "disable result pagination \n deault page size: 100"
-
         - $ref: '#/components/parameters/page_parameter'
       responses:
         '200':
@@ -367,209 +371,15 @@ paths:
 
 components:
   schemas:
+    Match: 
+      $ref: 'swagger/components/schemas/Match.yaml'
     Season:
-      type: object
-      properties:
-        type:
-          type: string
-          example: "seasons"
-          description: always set to 'seasons'
-        id:
-          type: string
-          example: "JR1K3RNQ9M"
-        value: 
-          type: string
-          example: "JR1K3RNQ9M"
-        title:
-          type: string
-          example: "Winter 2020"
-        name:
-          type: string
-          example: "Winter 2020"
-        is_current:
-          type: boolean
-          example: false
-        links: 
-          type: object
-          properties:
-            self:
-              type: object 
-              properties:
-                href: 
-                  type: string
-                  example: "https://mc-api.dribl.com/api/seasons/JR1K3RNQ9M"
-
+      $ref: 'swagger/components/schemas/Season.yaml'
     League:
-      type: object 
-      properties:
-        type:
-          type: string
-          example: "leagues"
-        id:
-          type: string
-          example: "8nm7Qzv0KO"
-        value: 
-          type: string
-          example: "8nm7Qzv0KO"      
-        order:
-          type: number
-          example: "19127"
-        title:
-          type: string 
-          example: "06 Leckie"
-        name:
-          type: string 
-          example: "06 Leckie"        
-        ladder_access: 
-          type: string 
-          example: "body"        
-        result_access: 
-          type: string 
-          example: "body"                
-        fixture_access:
-          type: string 
-          example: "public"        
-        image:
-          type: string
-        links: 
-          type: object
-          properties:
-            self:
-              type: object 
-              properties:
-                href: 
-                  type: string
-                  example: "https://mc-api.dribl.com/api/leagues/8nm7Qzv0KO"
+      $ref: 'swagger/components/schemas/League.yaml'
 
     Fixture:
-      type: object 
-      properties:    
-        type: 
-          type: string
-          example: fixtures
-        hash_id: 
-          type: string
-          example: OVdz6ABdGr
-        attributes: 
-          type: object
-          properties: 
-            name: 
-              type: string
-              example: Leichhardt Tigers 35 Division 01 Male A vs Balmain DFC 35 Division 01 Male
-            date: 
-              type: string
-              example: 2020-07-03T09:00:00.000000Z
-            round: 
-              type: string
-              example: R1
-            full_round: 
-              type: string
-              example: Round 1
-            ground_name: 
-              type: string
-              example: Pratten Park
-            ground_latitude: 
-              type: number
-              example: -33.892971
-            ground_longitude: 
-              type: number
-              example: 151.123099
-            ground_address: 
-              type: string
-              format: nullable
-            field_name: 
-              type: string
-              example: Field 1
-            is_historic_field: 
-              type: boolean
-            home_team_name: 
-              type: string
-              example: APIA Leichhardt Tigers Juniors 35 01 Male A
-            home_logo: 
-              type: string
-              example: https://ocean.dribl.com/0b3269b357314914a8898be9c16e2778
-            away_team_name: 
-              type: string
-              example: Balmain DFC 35 01 Male
-            away_logo: 
-              type: string
-              example: https://ocean.dribl.com/02beda303202489592f745009bc53450
-            competition_name: 
-              type: string
-              example: Home and Away
-            league_name: 
-              type: string
-              example: 35 01 Male
-            status: 
-              type: string
-              example: complete
-            bye_flag: 
-              type: boolean
-            is_unstructured: 
-              type: boolean
-            league_result_access: 
-              type: string
-              example: public
-            home_score: 
-              type: integer
-              format: int32
-              example: 5
-            home_score_extra: 
-              type: string
-              format: nullable
-            home_score_penalty: 
-              type: string
-              format: nullable
-            home_score_half: 
-              type: string
-              format: nullable
-            home_score_extra_half: 
-              type: string
-              format: nullable
-            away_score: 
-              type: integer
-              format: int32
-              example: 0
-            away_score_extra: 
-              type: string
-              format: nullable
-            away_score_penalty: 
-              type: string
-              format: nullable
-            away_score_half: 
-              type: string
-              format: nullable
-            away_score_extra_half: 
-              type: string
-              format: nullable
-            allocated_center_referee: 
-              type: boolean
-            allocated_assistant_referee_1: 
-              type: boolean
-            allocated_assistant_referee_2: 
-              type: boolean
-            allocated_fourth_official: 
-              type: boolean
-            allocated_game_leader: 
-              type: boolean
-            referee_count: 
-              type: integer
-              format: int32
-              example: 0
-            enable_referees_allocated: 
-              type: boolean
-            match_hash_id: 
-              type: string
-              example: AnmYzg4rNz
-            forfeit_team_hash_id: 
-              type: string
-              format: nullable
-            home_team_hash_id: 
-              type: string
-              example: wxNxgzwmkp
-            away_team_hash_id: 
-              type: string
-              example: RwNl565Kjr
+      $ref: "swagger/components/schemas/Fixture.yaml"
 
     Field:
       type: object 
@@ -748,7 +558,7 @@ components:
             socials: 
               type: array
               items: 
-                $ref: '#/components/schemas/Ground' 
+                $ref: 'swagger/components/schemas/Social.yaml'
             store: 
               type: string
               example: /club/3503
@@ -852,8 +662,6 @@ components:
           type: string
           example: body
 
-
-
     Competition:
       type: object 
       properties:
@@ -886,13 +694,11 @@ components:
                   type: string
                   example: https://mc-api.dribl.com/api/competitions/8BdVZP0dE5
 
-
+    
     Ladder:
-      type: object
-      properties:   
-        ladder_detail: 
-          type: string
-
+      $ref: "swagger/components/schemas/Ladder.yaml"
+    Ladder_Entry:
+      $ref: "swagger/components/schemas/Ladder_Entry.yaml"
     
     meta:
       type: object

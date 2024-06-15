@@ -1,0 +1,40 @@
+type: object 
+properties:
+  type:
+    type: string
+    example: "leagues"
+  id:
+    type: string
+    example: "8nm7Qzv0KO"
+  value: 
+    type: string
+    example: "8nm7Qzv0KO"      
+  order:
+    type: number
+    example: "19127"
+  title:
+    type: string 
+    example: "06 Leckie"
+  name:
+    type: string 
+    example: "06 Leckie"        
+  ladder_access: 
+    type: string 
+    example: "body"        
+  result_access: 
+    type: string 
+    example: "body"                
+  fixture_access:
+    type: string 
+    example: "public"        
+  image:
+    type: string
+  links: 
+    type: object
+    properties:
+      self:
+        type: object 
+        properties:
+          href: 
+            type: string
+            example: "https://mc-api.dribl.com/api/leagues/8nm7Qzv0KO"

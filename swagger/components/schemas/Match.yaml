@@ -1,0 +1,96 @@
+# Dribl definition of the Match object
+type: object
+properties:
+  id: 
+    type: string
+    example: emAWnaZbKB
+  date: 
+    type: string
+    example: '2022-11-08 07:45:00'
+  home_team_hash_id: 
+    type: string
+    example: k2Kp1k2PdY
+  home_club_name: 
+    type: string
+    example:  M.A.S. Jalapeños
+  home_team_name: 
+    type: string
+    example:  M.A.S. Jalapeños
+  home_club_image: 
+    type: string
+    format: nullable
+  match_hash_id: 
+    type: string
+    example: emAWnaZbKB
+  away_team_hash_id: 
+    type: string
+    example: RwNl1RXZKj
+  away_club_name: 
+    type: string
+    example:  Tornadoes
+  away_team_name: 
+    type: string
+    example:  Tornadoes
+  away_club_image: 
+    type: string
+    format: nullable
+  round_number: 
+    type: number
+    example: 6
+  status: 
+    type: string
+    example: complete
+  league_result_access: 
+    type: string
+    example: public
+  home_score: 
+    type: number
+    example: 14
+  home_score_extra: 
+    type: string
+    format: nullable
+  home_score_penalty: 
+    type: string
+    format: nullable
+  home_score_half: 
+    type: string
+    format: nullable
+  home_score_extra_half: 
+    type: string
+    format: nullable
+  away_score: 
+    type: number
+    example: 0
+  away_score_extra: 
+    type: string
+    format: nullable
+  away_score_penalty: 
+    type: string
+    format: nullable
+  away_score_half: 
+    type: string
+    format: nullable
+  away_score_extra_half: 
+    type: string
+    format: nullable
+  pub_disp_club_name: 
+    type: string
+    example: none
+  pub_disp_club_logo: 
+    type: number
+    example: 0
+  pub_disp_age_group: 
+    type: number
+    example: 0
+  pub_disp_division: 
+    type: number
+    example: 0
+  pub_disp_gender: 
+    type: number
+    example: 0
+  pub_disp_axis: 
+    type: number
+    example: 0
+  pub_disp_group: 
+    type: number
+    example: 1

@@ -1,0 +1,7 @@
+      type: object
+      description: the ladder is a collection of ladder entries. Each team in the league is represented by a ladder entry.
+      properties:   
+        data: 
+          type: array
+          items:
+            $ref: 'Ladder_Entry.yaml'

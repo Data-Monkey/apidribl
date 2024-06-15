@@ -1,0 +1,30 @@
+      type: object
+      properties:
+        type:
+          type: string
+          example: "seasons"
+          description: always set to 'seasons'
+        id:
+          type: string
+          example: "JR1K3RNQ9M"
+        value: 
+          type: string
+          example: "JR1K3RNQ9M"
+        title:
+          type: string
+          example: "Winter 2020"
+        name:
+          type: string
+          example: "Winter 2020"
+        is_current:
+          type: boolean
+          example: false
+        links: 
+          type: object
+          properties:
+            self:
+              type: object 
+              properties:
+                href: 
+                  type: string
+                  example: "https://mc-api.dribl.com/api/seasons/JR1K3RNQ9M"

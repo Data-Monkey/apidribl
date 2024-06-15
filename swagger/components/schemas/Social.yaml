@@ -1,6 +1,7 @@
 # social details list entry
+description: "no examples of socials have been found yet, this is a guess"
 type: object
-properties:   
+properties:
   social_detail: 
     type: string
     example: "facebook ID"

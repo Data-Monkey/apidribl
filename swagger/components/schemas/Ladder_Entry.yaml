@@ -1,0 +1,92 @@
+# Dribl definition of the LadderEntry object
+type: object
+properties:
+  type: 
+    type: string
+    example: ladder-entry
+  id: 
+    type: string
+    example: njdyXM2LK5
+  attributes: 
+    type: object
+    properties: 
+      team_hash_id: 
+        type: string
+        example: k2Kp1k2PdY
+      team_name: 
+        type: string
+        example:  M.A.S. Jalapeños
+      season_name: 
+        type: string
+        example: Summer 2022
+      club_code: 
+        type: string
+        example: NSC
+      club_name: 
+        type: string
+        format: nullable
+      club_logo: 
+        type: string
+        format: nullable
+      points: 
+        type: number
+        example: 16
+      goals_for: 
+        type: number
+        example: 30
+      goals_against: 
+        type: number
+        example: 1
+      goal_difference: 
+        type: number
+        example: 29
+      played: 
+        type: number
+        example: 6
+      won: 
+        type: number
+        example: 5
+      drawn: 
+        type: number
+        example: 1
+      lost: 
+        type: number
+        example: 0
+      seq_no: 
+        type: number
+        example: 5
+      position: 
+        type: number
+        example: 1
+      forfeits: 
+        type: number
+        example: 0
+      points_per_game: 
+        type: string
+        example: 2.67
+      byes: 
+        type: number
+        example: 0
+      point_adjustment: 
+        type: number
+        example: 0
+      pool_name: 
+        type: string
+        format: nullable
+      upcoming_matches: 
+        type: array
+        items: 
+          $ref: './Match.yaml'   
+      recent_matches: 
+        type: array
+        items: 
+          $ref: './Match.yaml'       
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/ladders/njdyXM2LK5
