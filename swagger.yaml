@@ -225,6 +225,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/query_tenant'      
         - $ref: '#/components/parameters/query_season'  
+        - $ref: '#/components/parameters/query_club'          
         - $ref: '#/components/parameters/query_paging'              
       responses:
         '200':
@@ -486,6 +487,13 @@ components:
         type: string
       description: season_id
 
+    query_club:
+      name: club
+      in: query
+      required: false
+      schema:
+        type: string
+      description: club_id
 
     query_paging:
       name: disable_paging
