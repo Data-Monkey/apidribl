@@ -24,6 +24,8 @@ erDiagram
     Ladder_Entry ||--o{ Match : has_recent
     Season  ||--o{ Competition   : has
     League ||--o{ Round   : has
+    Club ||--|| Ground : home_ground
+    Round ||--o{ Fixture : has
 ```
 
 

@@ -32,16 +32,13 @@ paths:
     get:
       tags:
       - "season"
-      summary: "list all seasons"
-      description: "list all seasons"
+      summary: "returns seasons"
+      description: "returns seasons"
       parameters:
-        - name: disable_paging
-          in: query
-          required: false
-          schema:
-            type: boolean
-          description: "disable result pagination \n deault page size: 100"
-        - $ref: '#/components/parameters/page_parameter'
+        - $ref: '#/components/parameters/query_tenant'       
+        - $ref: '#/components/parameters/query_paging'  
+        - $ref: '#/components/parameters/query_page'     
+
       responses:
         '200':
           description: 'successful operation'
@@ -55,19 +52,14 @@ paths:
                     items:
                       $ref: '#/components/schemas/Season'
 
-  /seasons/{season_id}:
+  /seasons/{id}:
     get:
       tags:
       - "season"
       summary: "returns season by id"
       description: "returns season details by id"
       parameters:
-        - in: path
-          name: season_id
-          required: true
-          schema:
-            type: string
-          description: The hash ID of the season
+        - $ref: '#/components/parameters/path_id' 
       responses:
         '200':
           description: 'successful operation'
@@ -84,7 +76,10 @@ paths:
     get:
       tags:
       - "season"
-      summary: "list all seasons"
+      summary: "returns seasons"
+      parameters:
+        - $ref: '#/components/parameters/query_tenant'    
+        - $ref: '#/components/parameters/query_paging'             
       responses:
         '200':
           description: 'successful operation'
@@ -103,8 +98,12 @@ paths:
     get:
       tags:
       - "clubs"
-      summary: "queries clubs"
+      summary: "returns clubs"
       description: "returns club details"
+      parameters:
+        - $ref: '#/components/parameters/query_tenant'      
+        - $ref: '#/components/parameters/query_season'           
+        - $ref: '#/components/parameters/query_paging'            
       responses:
         '200':
           description: 'successful operation'
@@ -119,41 +118,36 @@ paths:
                       $ref: '#/components/schemas/Club'
 
 
-  /clubs/{club_id}:
+  /clubs/{id}:
     get:
       tags:
       - "clubs"
       summary: "returns club by id"
       description: "returns club details by id"
       parameters:
-        - name: club_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: "season_id"
-
+        - $ref: '#/components/parameters/path_id' 
       responses:
         '200':
           description: 'successful operation'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Club'
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Club'
+
   /list/clubs:
     #https://mc-api.dribl.com/api/clubs?tenant=kbam1QjmwX
     #https://mc-api.dribl.com/api/clubs?season=bam14vjdwX&date_range=default&timezone=Australia%2FSydney
     get:
       tags:
       - "clubs"
-      summary: "list all clubs"
+      summary: "list clubs"
       parameters:
-        - name: season
-          in: query
-          required: false
-          schema:
-            type: string
-          description: "season_id"
+        - $ref: '#/components/parameters/query_tenant'      
+        - $ref: '#/components/parameters/query_season'           
+        - $ref: '#/components/parameters/query_paging'    
       responses:
         '200':
           description: 'successful operation'
@@ -227,7 +221,11 @@ paths:
     get:
       tags:
       - "grounds"
-      summary: "queries grounds"
+      summary: "returns list of grounds"
+      parameters:
+        - $ref: '#/components/parameters/query_tenant'      
+        - $ref: '#/components/parameters/query_season'  
+        - $ref: '#/components/parameters/query_paging'              
       responses:
         '200':
           description: 'successful operation'
@@ -241,18 +239,33 @@ paths:
                     items:
                       $ref: '#/components/schemas/Ground'
 
-  /grounds/{ground_id}:
+  /grounds/{id}:
     get:
       tags:
       - "grounds"
-      summary: "queries grounds by id"
+      summary: "returns ground by id"
       parameters:
-        - name: ground_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: "hash of the ground_id"
+        - $ref: '#/components/parameters/path_id'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Ground'
+
+  /list/grounds:
+    get:
+      tags:
+        - "grounds"
+      summary: "returns list of grounds"
+      parameters:
+        - $ref: '#/components/parameters/query_tenant'      
+        - $ref: '#/components/parameters/query_season'  
+        - $ref: '#/components/parameters/query_paging'              
       responses:
         '200':
           description: 'successful operation'
@@ -273,13 +286,9 @@ paths:
       - "competitions"
       summary: "queries competitions"
       parameters:
-        - name: tenant
-          in: query
-          required: false
-          schema:
-            type: string
-            description: hash string of the tenant
-          description: "tenant"
+        - $ref: '#/components/parameters/query_tenant'      
+        - $ref: '#/components/parameters/query_season'  
+        - $ref: '#/components/parameters/query_paging'    
       responses:
         '200':
           description: 'successful operation'
@@ -293,19 +302,14 @@ paths:
                     items:
                       $ref: '#/components/schemas/Competition'
 
-  /competitions/{competition_id}:
+  /competitions/{id}:
     get:
       tags:
       - "competitions"
       summary: "queries competitions by ID"
       parameters:
-        - name: competition_id
-          in: path
-          required: true
-          schema:
-            type: string
-            description: hash string
-          description: "competition_id"
+        - $ref: '#/components/parameters/path_id'
+
       responses:
         '200':
           description: 'successful operation'
@@ -321,16 +325,12 @@ paths:
   /tenants:
     # https://mc-api.dribl.com/api/tenants?mc_link=acnsw.dribl.com&slug=acnsw
     get:
-      tags:
-      - "tenants"
       summary: "queries tenants"
+      description: At least one filter parameter is required. Does not return the full list.
+      tags:
+        - "tenants"
       parameters:
-        - name: tenant_id
-          in: query
-          required: false
-          schema:
-            type: string
-          description: "ID of the enity"
+        - $ref: '#/components/parameters/query_tenant'
         - name: slug
           in: query
           required: false
@@ -357,10 +357,10 @@ paths:
       - "fixture"
       summary: "queries fixture / matches"
       parameters:
-        - $ref: '#/components/parameters/competition_query'
-        - $ref: '#/components/parameters/tenant_query'
-        - $ref: '#/components/parameters/season_query'
-        - $ref: '#/components/parameters/league_query'
+        - $ref: '#/components/parameters/query_competition'
+        - $ref: '#/components/parameters/query_tenant'
+        - $ref: '#/components/parameters/query_season'
+        - $ref: '#/components/parameters/query_league'
       responses:
         '200':
           description: 'successful operation'
@@ -377,15 +377,10 @@ paths:
   /fixtures/{id}:
     get:
       tags:
-      - "fixture"
-      summary: "queries fixture / matches"
+        - "fixture"
+      summary: "queries fixture / matches by id"
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: "fixture_id"
+        - $ref: '#/components/parameters/path_id'
       responses:
         '200':
           description: 'successful operation'
@@ -429,8 +424,6 @@ components:
       $ref: "swagger/components/schemas/Competition.yaml"
     Ladder:
       $ref: "swagger/components/schemas/Ladder.yaml"
-    # Ladder_Entry:
-    #   $ref: "swagger/components/schemas/Ladder_Entry.yaml"
 
     meta:
       type: object
@@ -453,7 +446,7 @@ components:
 
 
   parameters:
-    page_parameter:
+    query_page:
       name: page
       in: query
       required: false
@@ -461,7 +454,7 @@ components:
         type: integer
       description: "page selection - only available if disable_paging = false"
 
-    tenant_query:
+    query_tenant:
       name: tenant
       in: query
       required: false
@@ -469,7 +462,7 @@ components:
         type: string
       description: tenant_id
 
-    competition_query:
+    query_competition:
       name: competition
       in: query
       required: false
@@ -477,7 +470,7 @@ components:
         type: string
       description: competition_id
 
-    league_query:
+    query_league:
       name: league
       in: query
       required: false
@@ -485,10 +478,28 @@ components:
         type: string
       description: league_id
 
-    season_query:
+    query_season:
       name: season
       in: query
       required: false
       schema:
         type: string
       description: season_id
+
+
+    query_paging:
+      name: disable_paging
+      in: query
+      required: false
+      schema: 
+        type: boolean
+      description: disables paging. default is false
+
+
+    path_id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: ID of the entity
