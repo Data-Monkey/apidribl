@@ -1,0 +1,31 @@
+description: I am still a bit confused how competitions seasons and leagues interact with each other. Stay tuned...
+type: object
+properties:
+  type: 
+    type: string
+    example: competitions
+  id: 
+    type: string
+    example: 8BdVZP0dE5
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: 2023 Trial Matches
+      order: 
+        type: string
+        format: nullable
+      leagues: 
+        type: array
+        items: 
+          $ref: './Competition_League.yaml'  
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/competitions/8BdVZP0dE5

@@ -1,0 +1,61 @@
+description: I suspect a Tenant represents the association. A group of clubs managed by the same association.
+type: object
+properties: 
+  type: 
+    type: string
+    example: tenants
+  id: 
+    type: string
+    example: 1RwNlWemjr
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: FNSW
+      slug: 
+        type: string
+        example: fdprod
+      image: 
+        type: string
+        example: https://ocean.dribl.com/d39ed11933784f11acefdf5c93da0b7f
+      alt_image: 
+        type: string
+        example: https://ocean.dribl.com/7102e40b04314e659a17f96045da0741
+      tenantable_name: 
+        type: string
+        example: Football New South Wales
+      tenantable_type: 
+        type: string
+        example: body
+      color: 
+        type: string
+        example: #0C2B6B
+      accent: 
+        type: string
+        example: #69B3E7
+      mc_link: 
+        type: string
+        example: competitions.footballnsw.com.au
+      custom_banner: 
+        type: string
+        example: [location:defaultsize:2000source:https:\/\/ocean.dribl.com\/0ad74ef7567248be8577ff1057f7b0dcupload:false]
+      website: 
+        type: string
+        example: https://footballnsw.com.au/
+      socials: 
+        type: array
+        items: 
+          $ref: 'Social.yaml'
+      tenantable_hash_id: 
+        type: string
+        example: 1RwNlWemjr
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/tenants?tenant=1RwNlWemjr

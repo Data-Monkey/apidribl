@@ -1,0 +1,82 @@
+description: A club is a memeber of an Association (Tenant) and itself has many teams playing in different leagues over multiple seasons.
+type: object
+properties:
+  type: 
+    type: string
+    example: clubs
+  id: 
+    type: string
+    example: RwNlozYmjr
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: 1836 Adelaide
+      slug: 
+        type: string
+        format: nullable
+      image: 
+        type: string
+        example: https://ocean.dribl.com/44bb78c89af34b97be5b1949604a4267
+      alt_image: 
+        type: string
+        format: nullable
+      phone: 
+        type: string
+        format: nullable
+      email: 
+        type: string
+        example: me@example.com
+      email_address: 
+        type: string
+        example: me@example.com
+      url: 
+        type: string
+        format: nullable
+      color: 
+        type: string
+        example: "#303030"
+      accent: 
+        type: string
+        example: "#FEC530"
+      address: 
+        type: object
+        properties: 
+          address_line_1: 
+            type: string
+            format: nullable
+          address_line_2: 
+            type: string
+            format: nullable
+          city: 
+            type: string
+            format: nullable
+          state: 
+            type: string
+            example: SA
+          country: 
+            type: string
+            format: nullable
+          postcode: 
+            type: string
+            format: nullable
+      socials: 
+        type: array
+        items: 
+          $ref: 'Social.yaml'
+      store: 
+        type: string
+        example: /club/3503
+      grounds: 
+        type: string
+        format: nullable
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/clubs/RwNlozYmjr

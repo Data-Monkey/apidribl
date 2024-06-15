@@ -1,0 +1,50 @@
+description: A ground is one or many fields that are generally assigned to a Tenant.
+type: object 
+properties:
+  type:
+    type: string
+    example: clubs
+    description: always set to clubs but that is an ERROR in implentation, should be set to grounds!!
+  hash_id: 
+    type: string
+    example: vbd9v3n8m4
+  value: 
+    type: string
+    example: vbd9v3n8m4
+  title: 
+    type: string
+    example: 1Solution - Frank Mitchell Park
+  name: 
+    type: string
+    example: 1Solution - Frank Mitchell Park
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: 1Solution - Frank Mitchell Park
+      latitude: 
+        type: number
+        example: -34.887794
+      longitude: 
+        type: number
+        example: 138.521234
+      address: 
+        type: string
+        example: Agnes St-Seaton SA 5023
+      location: 
+        type: string
+        format: nullable
+      fields: 
+        type: array
+        items: 
+          $ref: 'Field.yaml'
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/grounds/vbd9v3n8m4

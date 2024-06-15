@@ -1,0 +1,58 @@
+description: A field is part of a ground. Matches are played on fields.
+type: object
+properties: 
+  type: 
+    type: string
+    example: fields
+  hash_id: 
+    type: string
+    example: gld4JroBNW
+  attributes: 
+    type: object
+    properties: 
+      name: 
+        type: string
+        example: Main
+      code: 
+        type: string
+        example: 59081-FMPMN
+      description: 
+        type: string
+        format: nullable
+      ground_hash_id: 
+        type: string
+        example: vbd9v3n8m4
+      parent_field_hash_id: 
+        type: string
+        format: nullable
+      field_type_hash_id: 
+        type: string
+        example: JR1K3RNQ9M
+      tenant_hash_id: 
+        type: string
+        example: 3pmvvjLmvJ
+      season_hash_id: 
+        type: string
+        example: 1pN6PP0d0g
+      field_type: 
+        type: object
+        properties: 
+          hash_id: 
+            type: string
+            example: JR1K3RNQ9M
+          name: 
+            type: string
+            example: Full Field
+          slug: 
+            type: string
+            example: full
+  links: 
+    type: object
+    properties: 
+      self: 
+        type: object
+        properties: 
+          href: 
+            type: string
+            example: https://mc-api.dribl.com/api/grounds/gld4JroBNW
+            description: the self link does not seem to work as a field_id is used in a ground api!!

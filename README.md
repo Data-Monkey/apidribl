@@ -13,6 +13,7 @@ erDiagram
     Club ||--o{ Team : has
     Ground ||--o{ Field : has
     Tenant ||--o{ Field : owns
+    Tenant ||--o{ Club  : assosiation_of
     Team }|..|{ Field : plays_on
     Competition
     Season
@@ -20,8 +21,7 @@ erDiagram
     Fixture ||--o{ Match : has
     Fixture ||--o{ Field : plays_on
     Ladder ||--o{ Ladder_Entry : has
-    Ladder_Entry ||--o{ Recent_Matches : has
-    Recent_Matches ||--o{ Matches : has
+    Ladder_Entry ||--o{ Match : has_recent
     
 ```
 

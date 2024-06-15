@@ -1,0 +1,24 @@
+description: A smaller version of the full League definition. This is used in the Competition schema.
+type: object
+properties: 
+  id: 
+    type: string
+    example: eRdkVngaKG
+  value: 
+    type: string
+    example: eRdkVngaKG
+  name: 
+    type: string
+    example: 23 Senior Men's Trial Matches
+  image: 
+    type: string
+    format: nullable
+  fixture_access: 
+    type: string
+    example: public
+  result_access: 
+    type: string
+    example: public
+  ladder_access: 
+    type: string
+    example: body
