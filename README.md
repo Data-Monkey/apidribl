@@ -1,11 +1,22 @@
-# APIDRIBL #
+# API DRIBL #
 
 I am trying to document the public API of dribl.com
 
-the swagger is presented here: https://data-monkey.github.io/apidribl/#/
+__mc-api.dribl.com__ seems to be the public api <br>
+__api.dribl.com__ is private
+
+I have documented whatever I found in OpenAPI notation and presetned it here: </br> </br>
+<b>https://data-monkey.github.io/apidribl/</b>
 
 
-the dribl app has many concepts that need to be related to each other. 
+The public api has many endpoints based around the needs of the public websites that dribl provides. I have mostly ignored these endpoints and focused on the data related ones<br>
+Website exampeles are:
+- https://mwfa.dribl.com/   Manly Warringha Football Association
+- https://competitions.footballnsw.com.au/ Football NSW  
+
+
+## Entities ##
+Dribl uses many concepts that need to be related to each other. 
 
 
 ```mermaid

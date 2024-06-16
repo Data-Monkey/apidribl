@@ -14,15 +14,25 @@ servers:
     description: Dribl API host
 
 tags:
+- name: tenants
+  description: A __TENANT__ represents an organisation/association that organises football competitions.
 - name: clubs
-  description: "Clubs have multiple teams "
-- name: "season"
-  description: "all about the seasons"
-- name: fixture
-  description: "Fixtures are matches "
+  description: A __CLUB__ is a member of a tenant/association and has multiple teams that play in different competitons/leagues.
+- name: "competitions"
+  description: A __COMPETITION__ is either a tournament or a ongoing competition organised by a tenant.
+- name: "leagues"
+  description: A __LEAGUE__ is part of a competiton. Usually splits the competition by age group or different rounds in a tournament. ie Group Stage vs Finals.
+- name: "seasons"
+  description: A __SEASON__ separtes a competition by year or generally time. The same competition can repeat every year as a new season.
+- name: fixtures
+  description: A __FIXTURE__ is a match with all its details. The time, field, teams, results, ...
 - name: grounds
-  description: "Grounds are a collection of Fields "
-
+  description: A __GROUND__ has one or more fields. Games/Fixtures are played on the fields.
+- name: ladders 
+  description: A __LADDER__ is the standings/ladder of a league/season combination. A ladder is made up of LADDER ENTRIES. These APIs return lists of LADDER_ENTRIES.
+- name: website endpoints 
+  description: these endpoints are used to generate the websites and are providing logos, links, sponsors, color schemes, ... 
+  
 # API ENDPOINTS
 
 paths:
@@ -31,7 +41,7 @@ paths:
   /seasons:
     get:
       tags:
-      - "season"
+      - "seasons"
       summary: "returns seasons"
       description: "returns seasons"
       parameters:
@@ -55,7 +65,7 @@ paths:
   /seasons/{id}:
     get:
       tags:
-      - "season"
+      - "seasons"
       summary: "returns season by id"
       description: "returns season details by id"
       parameters:
@@ -75,7 +85,7 @@ paths:
     description: lists seasons, no paging 
     get:
       tags:
-      - "season"
+      - "seasons"
       summary: "returns seasons"
       parameters:
         - $ref: '#/components/parameters/query_tenant'        
@@ -163,7 +173,7 @@ paths:
   /leagues:
     get:
       tags:
-      - "league"
+      - "leagues"
       summary: "get leagues"
       description: "lists all leagues matching the criteria \n Pagination seems to be always enabled and page size = 30"
       responses:
@@ -173,7 +183,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/League'
-
+#------ LADDERS ------
   /ladders:
     get:
       tags:
@@ -194,7 +204,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Ladder'
 
-  /ladders/{ladder_entry_id}:
+  /ladders/{iid}:
     get:
       tags:
       - "ladders"
@@ -352,7 +362,7 @@ paths:
     # https://mc-api.dribl.com/api/fixtures-clubs?date_range=date-range&date[]=2024-06-15&date[]=2024-06-17&season=3vmZpnGKq5&competition=R3NPZlPdr4&league=8RmwZnxjdE&tenant=kbam1QjmwX&timezone=Australia%2FSydney
     get:
       tags:
-      - "fixture"
+      - "fixtures"
       summary: "queries fixture / matches"
       parameters:
         - $ref: '#/components/parameters/query_competition'
@@ -375,7 +385,7 @@ paths:
   /fixtures/{id}:
     get:
       tags:
-        - "fixture"
+        - "fixtures"
       summary: "queries fixture / matches by id"
       parameters:
         - $ref: '#/components/parameters/path_id'
@@ -390,14 +400,35 @@ paths:
                   data:
                     $ref: '#/components/schemas/Fixture'
 
+#------ FIXTURES ------
+  /links:
+    get:
+      tags: 
+        - "website endpoints"
+      summary: returns links to be displayed on the website by tenant
+      description: i.e. https://mc-api.dribl.com/api/links?linkable_type=tenant&tenant=gld45b2mW5
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: object      
+  /sponsors:
+    get:
+      tags: 
+        - "website endpoints"
+      summary: returns sponsors to be displayed on the website by tenant
+      description: i.e. https://mc-api.dribl.com/api/sponsor-levels?sponsorable_type=tenant&tenant=gld45b2mW5
 
-  # /links:
-  #   description: don't know what is does
-  #   example: https://mc-api.dribl.com/api/links?linkable_type=tenant&tenant=gld45b2mW5
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: object                    
 
-  # /sponsors:
-  # https://mc-api.dribl.com/api/sponsors?sponsorable_type=tenant&tenant=gld45b2
-  # https://mc-api.dribl.com/api/sponsor-levels?sponsorable_type=tenant&tenant=gld45b2mW5
 
 #------ SCHEMA DEFINITIONS ------
 #swagger generator: https://roger13.github.io/SwagDefGen/
