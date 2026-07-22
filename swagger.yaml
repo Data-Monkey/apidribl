@@ -204,18 +204,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Ladder'
 
-  /ladders/{iid}:
+  /ladders/{id}:
     get:
       tags:
       - "ladders"
       summary: "queries ladders"
       parameters:
-        - name: ladder_entry_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: "hash ID of the ladder_entry"
+        - $ref: '#/components/parameters/path_id'
       responses:
         '200':
           description: 'successful operation'
